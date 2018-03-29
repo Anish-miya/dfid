@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>DFID</title>
+</head>
+<body>
+<form action="/create" method="post">
+    {% csrf_token %}
+
+    <label for="province_name">Province_name:</label>
+    <input type="text" name="province_name" required>
+
+
+    <label for="minister_name">Minister_name: <input type="text" name="minister_name" required>
+    </label>
+
+
+    <label for="capital">Capital_Name: <input type="text" name="capital" required>
+    </label>
+
+    <label for="districts">No.Of_Districts: <input type="text" name="districts" >
+    </label>
+
+
+    <input type="submit" value="submit"/>
+
+
+</form>
+
+<table class="table table-striped" border="1">
+    <thead>
+    <tr>
+        <th>Province_name</th>
+        <th>Minister_name</th>
+        <th>Capital</th>
+        <th>No.Of_Districts</th>
+        <th>Created_at</th>
+        <th>Updated_at</th>
+        <th>Actions</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr>
+        {% for province in provinces %}
+        <td>{{ province.province_name }}</td>
+        <td>{{ province.minister_name }}</td>
+        <td>{{ province.capital }}</td>
+        <td>{{ province.districts}}</td>
+        <td>{{ province.created_at }}</td>
+        <td>{{ province.updated_at }}</td>
+        <td><a href="/update/">Edit</a> <a href="/delete/{{ province.id }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>
+</body>
+</html>
